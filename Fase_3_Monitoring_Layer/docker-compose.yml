@@ -1,17 +1,15 @@
 services:
-  # FASE 1: Aplikasi
-  # a. 1 container khusus untuk web application, di dalam container ini memiliki aplikasi default Yii 2.0 
+  # FASE 1
   web-app:
-    build: ./web              # Membangun image dari Dockerfile 
+    build: ./web              
     container_name: yii-app   
   #  ports:
-  #    - "3000:3000"           # Mapping Port Host:Container 
+  #    - "3000:3000"           
     depends_on:
       - db                    
     networks:
       - dhealth-net
 
-  # b. 1 container khusus untuk database PostgreSQL
   db:
     image: postgres:16   
     container_name: postgres-db
@@ -20,13 +18,12 @@ services:
       POSTGRES_USER: ${DB_USER:-dhealth_user}
       POSTGRES_PASSWORD: ${DB_PASSWORD:-dhealth_secure_pass}
     volumes:
-      - ./db-data:/var/lib/postgresql/data # Volume mapping 
+      - ./db-data:/var/lib/postgresql/data 
     networks:
       - dhealth-net
 
 
-  # FASE 2: Reverse Proxy Nginx
-
+  # FASE 2
   nginx:
     image : nginx:latest
     container_name: nginx-proxy
@@ -40,13 +37,12 @@ services:
       - dhealth-net
 
 
-  # FASE 3: Monitoring dengan Prometheus dan Node Exporter
-
+  # FASE 3:
   node-exporter:
     image: prom/node-exporter:latest
     container_name: node-exporter
     command:
-      - '--path.rootfs=/host'        # 1. Beritahu Node Exporter bahwa root ada di folder /host
+      - '--path.rootfs=/host'        
     volumes:
       - /:/host:ro
     networks:
@@ -74,7 +70,6 @@ services:
     networks:
       - dhealth-net
 
-# Mendefinisikan Network agar kedua container bisa saling komunikasi
 networks:
   dhealth-net:
     driver: bridge
