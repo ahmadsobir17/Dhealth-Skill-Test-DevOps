@@ -1,4 +1,14 @@
+# Yii framework directories
+/vendor
+/web/assets/*
+!/web/assets/.gitignore
+/runtime/*
+!/runtime/.gitignore
+
+# Environment
+.env
 db-data
+
+# IDE
 .idea
 .vscode
-.env
