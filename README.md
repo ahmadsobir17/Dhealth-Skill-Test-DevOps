@@ -2,7 +2,7 @@
 
 Repository ini berisi infrastruktur containerized untuk aplikasi Yii 2.0 dengan database PostgreSQL, Nginx Reverse Proxy, dan Monitoring Stack (Prometheus + Grafana).
 
-Solusi dikerjakan berdasarkan spesifikasi dokumen yang telah di berikan.
+Solusi dikerjakan berdasarkan spesifikasi dokumen yang telah diberikan.
 
 ## 🌐 Live Demo (Cloudflare Zero Trust)
 
@@ -10,8 +10,8 @@ Aplikasi ini telah diduplikasi ke environment live menggunakan **Cloudflare Tunn
 
 | Service | URL | Keterangan |
 |---------|-----|------------|
-| **Web Application** | [https://dhealth.agusahmad.my.id/](https://dhealth.agusahmad.my.id/) | Yii 2.0 Framework | |
-| **Grafana Dashboard** | [https://monitor.agusahmad.my.id/](https://monitor.agusahmad.my.id/) | Monitoring CPU/RAM/Disk | admin:admin
+| **Web Application** | [https://dhealth.agusahmad.my.id/](https://dhealth.agusahmad.my.id/) | Yii 2.0 Framework |
+| **Grafana Dashboard** | [https://monitor.agusahmad.my.id/](https://monitor.agusahmad.my.id/) | Monitoring Metrics (User: `admin`, Pass: `admin`) |
 
 > *Note: Jika link tidak dapat diakses, kemungkinan tunnel sedang offline (local machine dimatikan).*
 

@@ -36,7 +36,6 @@ services:
     networks:
       - dhealth-net
 
-# Mendefinisikan Network agar kedua container bisa saling komunikasi
 networks:
   dhealth-net:
     driver: bridge
