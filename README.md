@@ -67,7 +67,7 @@ Prometheus diset `scrape_interval: 5s` agar demo perubahan CPU/RAM terlihat inst
 
 ```bash
 # 1. Clone Repository
-git clone https://github.com/ahmadsobir17/dhealth-test.git
+git clone https://github.com/ahmadsobir17/Dhealth-Skill-Test-DevOps.git
 cd dhealth-test
 
 # 2. Jalankan Docker Compose
