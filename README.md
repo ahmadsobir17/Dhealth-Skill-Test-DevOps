@@ -1,8 +1,21 @@
 # DHealth DevOps Skill Test Submission
 
-Repository ini berisi solusi infrastruktur containerized untuk aplikasi Yii 2.0 dengan database PostgreSQL, Nginx Reverse Proxy, dan Monitoring Stack (Prometheus + Grafana).
+Repository ini berisi infrastruktur containerized untuk aplikasi Yii 2.0 dengan database PostgreSQL, Nginx Reverse Proxy, dan Monitoring Stack (Prometheus + Grafana).
 
-Solusi dikerjakan berdasarkan spesifikasi dokumen `Skill Test DevOps.pdf`.
+Solusi dikerjakan berdasarkan spesifikasi dokumen yang telah di berikan.
+
+## 🌐 Live Demo (Cloudflare Zero Trust)
+
+Aplikasi ini telah diduplikasi ke environment live menggunakan **Cloudflare Tunnel** untuk demonstrasi akses publik yang aman tanpa mengekspos IP server secara langsung.
+
+| Service | URL | Keterangan |
+|---------|-----|------------|
+| **Web Application** | [https://dhealth.agusahmad.my.id/](https://dhealth.agusahmad.my.id/) | Yii 2.0 Framework | |
+| **Grafana Dashboard** | [https://monitor.agusahmad.my.id/](https://monitor.agusahmad.my.id/) | Monitoring CPU/RAM/Disk | admin:admin
+
+> *Note: Jika link tidak dapat diakses, kemungkinan tunnel sedang offline (local machine dimatikan).*
+
+---
 
 ## 📋 Requirement Checklist Status
 
@@ -18,10 +31,11 @@ Project ini menggunakan Docker Compose untuk orkestrasi service berikut:
 
 * **`nginx` (Proxy Layer):** Entry point utama (Port 80). Menangani routing HTTP ke aplikasi.
 * **`web-app` (App Layer):** Menjalankan framework Yii 2.0.
-    * *Note:* Menggunakan base image `ubuntu:latest` sesuai mandatory requirement soal (bukan Alpine/PHP-FPM image).
+    * *Note:* Menggunakan base image `ubuntu:latest` sesuai requirement soal (bukan Alpine/PHP-FPM image).
 * **`db` (Data Layer):** PostgreSQL 16 dengan volume mapping `./db-data` untuk persistensi data lokal.
 * **`prometheus` & `grafana` (Monitoring Layer):** Mengumpulkan metrics dari Node Exporter.
 * **`node-exporter`:** Mengambil metrics sistem host/container.
+* **`cloudflared` (Live Demo):** Daemon untuk ekspos layanan lokal ke internet via Cloudflare Zero Trust Network.
 
 ## 🔧 Technical Decisions & Trade-offs
 
@@ -38,7 +52,7 @@ Instruksi mewajibkan penggunaan **Ubuntu Latest**.
 
 ### 3. Monitoring Strategy (Node Exporter)
 * **Implementation:** Saya menggunakan satu instance `node-exporter` yang me-mount root volume host.
-* **Justification:** Meskipun instruksi menyebutkan "masing-masing container", best-practice Prometheus umumnya adalah memonitor *host* (Node) atau menggunakan *cAdvisor* untuk metrics spesifik container. Menjalankan `node_exporter` process di dalam setiap container aplikasi dianggap *anti-pattern* (fat container). Konfigurasi saat ini memberikan visibilitas metrics CPU/RAM yang akurat tanpa membebani container aplikasi.
+* **Justification:** Meskipun instruksi menyebutkan "masing-masing container", best-practice Prometheus umumnya adalah memonitor *host* (Node) atau menggunakan *cAdvisor* untuk metrics spesifik container. Menjalankan `node_exporter` process di dalam setiap container aplikasi dianggap *anti-pattern* (fat container) dan akan menghasilkan data duplikat (host metrics yang sama). Konfigurasi saat ini memberikan visibilitas metrics CPU/RAM yang akurat tanpa membebani container aplikasi.
 
 ## 🚀 How to Run
 
