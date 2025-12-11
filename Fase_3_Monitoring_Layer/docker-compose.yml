@@ -70,16 +70,6 @@ services:
     networks:
       - dhealth-net
 
-  cloudflared:
-    image: cloudflare/cloudflared:latest
-    container_name: cloudflared
-    restart: unless-stopped
-    command: tunnel --no-autoupdate run
-    environment:
-      - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}
-    networks:
-      - dhealth-net
-
 # Mendefinisikan Network agar kedua container bisa saling komunikasi
 networks:
   dhealth-net:

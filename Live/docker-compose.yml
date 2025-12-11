@@ -16,9 +16,9 @@ services:
     image: postgres:16   
     container_name: postgres-db
     environment:
-      POSTGRES_DB: yii2basic  
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: secretpassword
+      POSTGRES_DB: ${DB_NAME:-yii2basic}  
+      POSTGRES_USER: ${DB_USER:-dhealth_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-dhealth_secure_pass}
     volumes:
       - ./db-data:/var/lib/postgresql/data # Volume mapping 
     networks:
