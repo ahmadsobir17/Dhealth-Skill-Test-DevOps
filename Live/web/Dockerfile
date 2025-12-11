@@ -2,14 +2,14 @@ FROM ubuntu:latest
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && apt-get install -y php8.3 \
-    php \
-    php-cli \
-    php-mbstring \
-    php-xml \
-    php-pgsql \
-    php-intl \
-    php-curl \
+RUN apt-get update && apt-get install -y \
+    php8.3 \
+    php8.3-cli \
+    php8.3-mbstring \
+    php8.3-xml \
+    php8.3-pgsql \
+    php8.3-intl \
+    php8.3-curl \
     unzip \
     curl \
     git \
