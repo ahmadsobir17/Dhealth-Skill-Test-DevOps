@@ -1,0 +1,44 @@
+services:
+  # FASE 1: Aplikasi
+  # a. 1 container khusus untuk web application, di dalam container ini memiliki aplikasi default Yii 2.0 
+  web-app:
+    build: ./web              # Membangun image dari Dockerfile 
+    container_name: yii-app   
+  #  ports:
+  #    - "3000:3000"           # Mapping Port Host:Container 
+    depends_on:
+      - db                    
+    networks:
+      - dhealth-net
+
+  # b. 1 container khusus untuk database PostgreSQL
+  db:
+    image: postgres:16   
+    container_name: postgres-db
+    environment:
+      POSTGRES_DB: ${DB_NAME:-yii2basic}  
+      POSTGRES_USER: ${DB_USER:-dhealth_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-dhealth_secure_pass}
+    volumes:
+      - ./db-data:/var/lib/postgresql/data # Volume local 
+    networks:
+      - dhealth-net
+
+
+# --- FASE 2: NGINX ---
+  nginx:
+    image : nginx:latest
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - web-app
+    networks:
+      - dhealth-net
+
+# Mendefinisikan Network agar kedua container bisa saling komunikasi
+networks:
+  dhealth-net:
+    driver: bridge
