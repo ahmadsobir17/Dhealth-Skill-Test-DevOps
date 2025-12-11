@@ -29,7 +29,7 @@ Sistem ini diorkestrasi menggunakan **Docker Compose** dan terbagi menjadi 3 Lay
 
 3. **Monitoring Layer (Observability)**  
    - Node Exporter  
-   - Prometheus (scrape interval 1 detik)  
+   - Prometheus (scrape interval 5 detik)  
    - Grafana Dashboard
 
 ---
@@ -52,8 +52,8 @@ Source code **Yii 2.0** ditanam langsung ke dalam Docker Image saat build untuk 
 ### 2. Data Persistence (Database)
 Menggunakan Volume Mapping `./db-data:/var/lib/postgresql/data` agar data tidak hilang saat container dihapus.
 
-### 3. Aggressive Monitoring (1s Interval)
-Prometheus diset `scrape_interval: 1s` agar demo perubahan CPU/RAM terlihat instan.
+### 3. Monitoring 
+Prometheus diset `scrape_interval: 5s` agar demo perubahan CPU/RAM terlihat instan.
 
 ---
 
