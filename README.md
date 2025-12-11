@@ -44,5 +44,5 @@ Instruksi mewajibkan penggunaan **Ubuntu Latest**.
 
 1. **Clone Repository**
    ```bash
-   git clone [https://github.com/ahmadsobir17/Dhealth-Skill-Test-DevOps.git](https://github.com/ahmadsobir17/Dhealth-Skill-Test-DevOps.git)
+   git clone https://github.com/ahmadsobir17/Dhealth-Skill-Test-DevOps.git
    cd Dhealth-Skill-Test-DevOps
